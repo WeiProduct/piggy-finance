@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piggy - Personal Finance Made Simple</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS variables */
+        :root {
+            --primary: #FF6B6B;    /* Main color: pink */
+            --secondary: #4ECDC4;  /* Secondary color: teal */
+            --dark: #292F36;       /* Dark color: near black */
+            --light: #F7FFF7;      /* Light color: near white */
+            --accent: #FFE66D;     /* Accent color: yellow */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Header/Navigation */
+        header {
+            background-color: var(--primary);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo img {
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .get-started {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .get-started:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 50px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 30px;
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin-bottom: 40px;
+            animation: fadeInUp 1.2s ease;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            animation: fadeInUp 1.4s ease;
+        }
+        
+        .download-btn {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .download-btn i {
+            margin-right: 8px;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        
+        .learn-more-btn {
+            background-color: transparent;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .learn-more-btn i {
+            margin-right: 8px;
+        }
+        
+        .learn-more-btn:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+            background-color: var(--light);
+            text-align: center;
+        }
+        
+        .features h2 {
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: var(--dark);
+        }
+        
+        .features-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            flex: 1 1 300px;
+            max-width: 350px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            padding: 80px 20px;
+            background-color: white;
+            text-align: center;
+        }
+        
+        .how-it-works .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .how-it-works .section-title p {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            color: #666;
+        }
+        
+        .steps-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+        
+        .step {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            flex: 1 1 300px;
+            max-width: 350px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .step:hover {
+            transform: translateY(-10px);
+        }
+        
+        .step-number {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .step p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        /* App Showcase Section */
+        .app-showcase {
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .app-showcase h3 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+        
+        .app-screenshots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .screenshot {
+            flex: 0 1 300px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background-color: white;
+        }
+        
+        .screenshot:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .screenshot img {
+            width: 100%;
+            height: auto;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+            border: 1px solid #eee;
+        }
+        
+        .screenshot p {
+            padding: 15px 10px;
+            margin: 0;
+            font-weight: bold;
+            color: var(--dark);
+            font-size: 16px;
+        }
+        
+        /* Responsive app showcase */
+        @media (max-width: 768px) {
+            .app-screenshots {
+                gap: 15px;
+            }
+            
+            .screenshot {
+                flex: 0 1 45%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .app-screenshots {
+                gap: 10px;
+            }
+            
+            .screenshot {
+                flex: 0 1 100%;
+            }
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-logo {
+            flex: 1 1 300px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .footer-links {
+            flex: 1 1 300px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links h4 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+            margin-bottom: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                width: 80%;
+            }
+            
+            .features-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/piggy_logo.png" alt="Piggy Logo" style="width: 40px; height: 40px; margin-right: 10px;">
+            <span>Piggy</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#for-you">For You</a></li>
+                <li><a href="#why-piggy">Why Piggy</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="get-started">Get Started</a>
+    </header>
+    
+    <section class="hero">
+        <h1>Take Control of Your Finances</h1>
+        <p>Piggy makes personal finance simple and intuitive. Track expenses, set budgets, and achieve your financial goals with minimal effort.</p>
+        <div class="cta-buttons">
+            <a href="#" class="download-btn"><i class="fas fa-download"></i> Download Now</a>
+            <a href="#" class="learn-more-btn"><i class="fas fa-info-circle"></i> Learn More</a>
+        </div>
+    </section>
+    
+    <section id="features" class="features">
+        <h2>Why Choose Piggy?</h2>
+        <div class="features-container">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h3>Smart Budgeting</h3>
+                <p>Create personalized budgets based on your spending habits and financial goals. Piggy helps you stay on track with intelligent alerts and recommendations.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>Secure & Private</h3>
+                <p>Your financial data is encrypted and never shared. We prioritize your privacy and security above all else with bank-level encryption.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Anywhere, Anytime</h3>
+                <p>Access your finances on any device. Sync across all your devices for a seamless experience wherever you go, even offline.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How Piggy Works</h2>
+                <p>Getting started with Piggy is easy. Follow these simple steps to take control of your finances.</p>
+            </div>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Download & Sign Up</h3>
+                    <p>Download Piggy from your app store and create an account in less than 2 minutes. No credit card required.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Connect Your Accounts</h3>
+                    <p>Securely connect your bank accounts and credit cards to automatically import and categorize transactions.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Set Goals & Save</h3>
+                    <p>Create financial goals, track your progress, and watch your savings grow with personalized insights.</p>
+                </div>
+            </div>
+            
+            <div class="app-showcase">
+                <h3>App Features</h3>
+                <div class="app-screenshots">
+                    <div class="screenshot">
+                        <img src="app_screenshots/IMG_5863.PNG" alt="Piggy App Home Screen">
+                        <p>Home Dashboard</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="app_screenshots/IMG_5864.PNG" alt="Piggy App Bills Screen">
+                        <p>Bills Tracking</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="app_screenshots/IMG_5865.PNG" alt="Piggy App Add Transaction">
+                        <p>Add Transactions</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="app_screenshots/IMG_5867.PNG" alt="Piggy App Statistics">
+                        <p>Statistics & Analysis</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="app_screenshots/IMG_5868.PNG" alt="Piggy App Profile">
+                        <p>User Profile</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="app_screenshots/IMG_5869.PNG" alt="Piggy App AI Analysis">
+                        <p>Financial Intelligence</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="app_screenshots/IMG_5870.PNG" alt="Piggy App Smart Recommendations">
+                        <p>Smart Recommendations</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="app_screenshots/IMG_5871.PNG" alt="Piggy App Chinese Interface">
+                        <p>Multi-language Support</p>
+                    </div>
+                    <div class="screenshot">
+                        <img src="app_screenshots/IMG_5872.PNG" alt="Piggy App Expense Categories">
+                        <p>Expense Categories</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Users Say</h2>
+                <p>Join thousands of satisfied users who have transformed their financial lives with Piggy.</p>
+            </div>
+            <div class="testimonials-container">
+                <div class="testimonial-slides" id="testimonial-slides">
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <p class="testimonial-content">Piggy has completely changed how I manage my money. The intuitive interface and smart budgeting features helped me save for my dream vacation in just 6 months!</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIzMCIgZmlsbD0iI2VlZSIvPjxjaXJjbGUgY3g9IjMwIiBjeT0iMjIiIHI9IjEwIiBmaWxsPSIjYWFhIi8+PHBhdGggZD0iTTEwLDQ4QzE1LDM1IDQ1LDM1IDUwLDQ4QzQ1LDYwIDE1LDYwIDEwLDQ4WiIgZmlsbD0iI2FhYSIvPjwvc3ZnPg==" alt="User Avatar">
+                                </div>
+                                <div class="author-info">
+                                    <h4>Sarah Johnson</h4>
+                                    <p>Marketing Manager</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <p class="testimonial-content">As someone who always struggled with finances, Piggy made it simple to understand where my money was going. I've paid off $5,000 in debt in just 3 months!</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIzMCIgZmlsbD0iI2VlZSIvPjxjaXJjbGUgY3g9IjMwIiBjeT0iMjIiIHI9IjEwIiBmaWxsPSIjYWFhIi8+PHBhdGggZD0iTTEwLDQ4QzE1LDM1IDQ1LDM1IDUwLDQ4QzQ1LDYwIDE1LDYwIDEwLDQ4WiIgZmlsbD0iI2FhYSIvPjwvc3ZnPg==" alt="User Avatar">
+                                </div>
+                                <div class="author-info">
+                                    <h4>Michael Chen</h4>
+                                    <p>Software Developer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <p class="testimonial-content">The visual reports in Piggy make it so easy to see where I can cut expenses. I've increased my monthly savings by 30% since I started using the app!</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIzMCIgZmlsbD0iI2VlZSIvPjxjaXJjbGUgY3g9IjMwIiBjeT0iMjIiIHI9IjEwIiBmaWxsPSIjYWFhIi8+PHBhdGggZD0iTTEwLDQ4QzE1LDM1IDQ1LDM1IDUwLDQ4QzQ1LDYwIDE1LDYwIDEwLDQ4WiIgZmlsbD0iI2FhYSIvPjwvc3ZnPg==" alt="User Avatar">
+                                </div>
+                                <div class="author-info">
+                                    <h4>Emily Rodriguez</h4>
+                                    <p>Teacher</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-dots" id="testimonial-dots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for financial tips, app updates, and exclusive offers.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+    
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about Piggy and personal finance management.</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item active">
+                    <div class="faq-question">
+                        Is my financial data secure with Piggy? <span><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! Piggy uses bank-level 256-bit encryption to protect your data. We never store your bank credentials, and all information is transmitted using secure connections. Your privacy and security are our top priorities.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How much does Piggy cost? <span><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Piggy offers a free basic plan that includes expense tracking, budgeting, and basic reports. Our Premium plan ($4.99/month) unlocks advanced features like investment tracking, goal planning, and personalized financial insights.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I connect multiple bank accounts? <span><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Piggy supports connections to over 10,000 financial institutions worldwide. You can connect multiple bank accounts, credit cards, investment accounts, and loans to get a complete picture of your finances.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I get started with Piggy? <span><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Getting started is easy! Download the app from your device's app store, create an account, and follow the guided setup process. You can be up and running in less than 5 minutes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <span>🐷</span> Piggy
+                    </div>
+                    <p class="footer-about">Piggy is a personal finance app designed to help you take control of your money, track expenses, and achieve your financial goals.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#features"><i class="fas fa-chevron-right"></i> Features</a></li>
+                        <li><a href="#how-it-works"><i class="fas fa-chevron-right"></i> How It Works</a></li>
+                        <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Testimonials</a></li>
+                        <li><a href="#faq"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Help Center</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Cookie Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-title">Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Fieldstone Slate, Amherst, Massachusetts 01003</li>
+                        <li><i class="fas fa-phone-alt"></i> (413) 472-7021</li>
+                        <li><i class="fas fa-envelope"></i> 1597498880fw@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2023 Piggy Finance. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <a href="#" class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const nav = document.getElementById('nav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = nav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+                backToTop.classList.add('show');
+            } else {
+                header.classList.remove('scrolled');
+                backToTop.classList.remove('show');
+            }
+        });
+        
+        // Testimonial Slider
+        const testimonialSlides = document.getElementById('testimonial-slides');
+        const dots = document.querySelectorAll('.dot');
+        
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const slideIndex = dot.getAttribute('data-slide');
+                testimonialSlides.scrollTo({
+                    left: testimonialSlides.offsetWidth * slideIndex,
+                    behavior: 'smooth'
+                });
+                
+                dots.forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+            });
+        });
+        
+        // Update dots on scroll
+        testimonialSlides.addEventListener('scroll', () => {
+            const index = Math.round(testimonialSlides.scrollLeft / testimonialSlides.offsetWidth);
+            dots.forEach(d => d.classList.remove('active'));
+            dots[index].classList.add('active');
+        });
+        
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all items
+                faqItems.forEach(faqItem => {
+                    faqItem.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // Back to Top Button
+        const backToTop = document.getElementById('back-to-top');
+        
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const headerHeight = header.offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (nav.classList.contains('active')) {
+                            nav.classList.remove('active');
+                            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
