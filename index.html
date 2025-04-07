@@ -6,13 +6,12 @@
     <title>Piggy - Personal Finance Made Simple</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* CSS variables */
         :root {
-            --primary: #FF6B6B;    /* Main color: pink */
-            --secondary: #4ECDC4;  /* Secondary color: teal */
-            --dark: #292F36;       /* Dark color: near black */
-            --light: #F7FFF7;      /* Light color: near white */
-            --accent: #FFE66D;     /* Accent color: yellow */
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --dark: #292F36;
+            --light: #F7FFF7;
+            --accent: #FFE66D;
         }
         
         * {
@@ -27,7 +26,6 @@
             line-height: 1.6;
         }
         
-        /* Header/Navigation */
         header {
             background-color: var(--primary);
             padding: 20px 50px;
@@ -105,7 +103,6 @@
             box-shadow: 0 6px 8px rgba(0,0,0,0.15);
         }
         
-        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             min-height: 100vh;
@@ -197,7 +194,6 @@
             transform: translateY(-3px);
         }
         
-        /* Features Section */
         .features {
             padding: 80px 20px;
             background-color: var(--light);
@@ -250,7 +246,6 @@
             font-size: 16px;
         }
         
-        /* How It Works Section */
         .how-it-works {
             padding: 80px 20px;
             background-color: white;
@@ -318,7 +313,6 @@
             font-size: 16px;
         }
         
-        /* App Showcase Section */
         .app-showcase {
             margin-top: 60px;
             text-align: center;
@@ -370,7 +364,6 @@
             font-size: 16px;
         }
         
-        /* Responsive app showcase */
         @media (max-width: 768px) {
             .app-screenshots {
                 gap: 15px;
@@ -391,7 +384,6 @@
             }
         }
         
-        /* Footer */
         footer {
             background-color: var(--dark);
             color: white;
@@ -471,7 +463,6 @@
             font-size: 14px;
         }
         
-        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -483,7 +474,6 @@
             }
         }
         
-        /* Responsive Design */
         @media (max-width: 768px) {
             header {
                 padding: 15px 20px;
@@ -526,8 +516,8 @@
 <body>
     <header>
         <div class="logo">
-            <!-- <img src="images/piggy_logo.png" alt="Piggy Logo" style="width: 40px; height: 40px; margin-right: 10px;"> -->
-            <span>🐷 Piggy</span>
+            <img src="piggy_logo.png" alt="Piggy Logo" style="width: 40px; height: 40px; margin-right: 10px;">
+            <span>Piggy</span>
         </div>
         <nav>
             <ul>
@@ -607,58 +597,47 @@
                 <h3>App Features</h3>
                 <div class="app-screenshots">
                     <div class="screenshot">
-                        <!-- 
-                        <img src="app_screenshots/IMG_5863.PNG" alt="Piggy App Home Screen">
-                        -->
+                        <img src="IMG_5863.PNG" alt="Piggy App Home Screen">
                         <p>Home Dashboard</p>
                     </div>
                     <div class="screenshot">
-                        <!-- 
-                        <img src="app_screenshots/IMG_5864.PNG" alt="Piggy App Bills Screen">
-                        -->
+                        <img src="IMG_5864.PNG" alt="Piggy App Bills Screen">
                         <p>Bills Tracking</p>
                     </div>
                     <div class="screenshot">
-                        <!-- 
-                        <img src="app_screenshots/IMG_5865.PNG" alt="Piggy App Add Transaction">
-                        -->
+                        <img src="IMG_5865.PNG" alt="Piggy App Add Transaction">
                         <p>Add Transactions</p>
                     </div>
                     <div class="screenshot">
-                        <!-- 
-                        <img src="app_screenshots/IMG_5867.PNG" alt="Piggy App Statistics">
-                        -->
+                        <img src="IMG_5867.PNG" alt="Piggy App Statistics">
                         <p>Statistics & Analysis</p>
                     </div>
                     <div class="screenshot">
-                        <!-- 
-                        <img src="app_screenshots/IMG_5868.PNG" alt="Piggy App Profile">
-                        -->
+                        <img src="IMG_5868.PNG" alt="Piggy App Profile">
                         <p>User Profile</p>
                     </div>
                     <div class="screenshot">
-                        <!-- 
-                        <img src="app_screenshots/IMG_5869.PNG" alt="Piggy App AI Analysis">
-                        -->
+                        <img src="IMG_5869.PNG" alt="Piggy App AI Analysis">
                         <p>Financial Intelligence</p>
                     </div>
                     <div class="screenshot">
-                        <!-- 
-                        <img src="app_screenshots/IMG_5870.PNG" alt="Piggy App Smart Recommendations">
-                        -->
+                        <img src="IMG_5870.PNG" alt="Piggy App Smart Recommendations">
                         <p>Smart Recommendations</p>
                     </div>
                     <div class="screenshot">
-                        <!-- 
-                        <img src="app_screenshots/IMG_5871.PNG" alt="Piggy App Chinese Interface">
-                        -->
+                        <img src="IMG_5871.PNG" alt="Piggy App Chinese Interface">
                         <p>Multi-language Support</p>
                     </div>
                     <div class="screenshot">
-                        <!-- 
-                        <img src="app_screenshots/IMG_5872.PNG" alt="Piggy App Expense Categories">
-                        -->
+                        <img src="IMG_5872.PNG" alt="Piggy App Expense Categories">
                         <p>Expense Categories</p>
+                    </div>
+                </div>
+                
+                <div class="video-showcase" style="margin-top: 40px; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    <h3>Watch Piggy in Action</h3>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/AeWkUFS3Rqc" title="Piggy Finance App Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -841,87 +820,91 @@
     </a>
     
     <script>
-        // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const nav = document.getElementById('nav');
         
-        mobileMenuBtn.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            mobileMenuBtn.innerHTML = nav.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
+        if (mobileMenuBtn && nav) {
+            mobileMenuBtn.addEventListener('click', () => {
+                nav.classList.toggle('active');
+                mobileMenuBtn.innerHTML = nav.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+        }
         
-        // Header Scroll Effect
         const header = document.getElementById('header');
+        const backToTop = document.getElementById('back-to-top');
         
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-                backToTop.classList.add('show');
-            } else {
-                header.classList.remove('scrolled');
-                backToTop.classList.remove('show');
+            if (header && backToTop) {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                    backToTop.classList.add('show');
+                } else {
+                    header.classList.remove('scrolled');
+                    backToTop.classList.remove('show');
+                }
             }
         });
         
-        // Testimonial Slider
         const testimonialSlides = document.getElementById('testimonial-slides');
         const dots = document.querySelectorAll('.dot');
         
-        dots.forEach(dot => {
-            dot.addEventListener('click', () => {
-                const slideIndex = dot.getAttribute('data-slide');
-                testimonialSlides.scrollTo({
-                    left: testimonialSlides.offsetWidth * slideIndex,
-                    behavior: 'smooth'
+        if (testimonialSlides && dots.length) {
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const slideIndex = dot.getAttribute('data-slide');
+                    testimonialSlides.scrollTo({
+                        left: testimonialSlides.offsetWidth * slideIndex,
+                        behavior: 'smooth'
+                    });
+                    
+                    dots.forEach(d => d.classList.remove('active'));
+                    dot.classList.add('active');
                 });
-                
-                dots.forEach(d => d.classList.remove('active'));
-                dot.classList.add('active');
             });
-        });
-        
-        // Update dots on scroll
-        testimonialSlides.addEventListener('scroll', () => {
-            const index = Math.round(testimonialSlides.scrollLeft / testimonialSlides.offsetWidth);
-            dots.forEach(d => d.classList.remove('active'));
-            dots[index].classList.add('active');
-        });
-        
-        // FAQ Accordion
-        const faqItems = document.querySelectorAll('.faq-item');
-        
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
             
-            question.addEventListener('click', () => {
-                const isActive = item.classList.contains('active');
-                
-                // Close all items
-                faqItems.forEach(faqItem => {
-                    faqItem.classList.remove('active');
-                });
-                
-                // Open clicked item if it wasn't active
-                if (!isActive) {
-                    item.classList.add('active');
+            testimonialSlides.addEventListener('scroll', () => {
+                const index = Math.round(testimonialSlides.scrollLeft / testimonialSlides.offsetWidth);
+                dots.forEach(d => d.classList.remove('active'));
+                if (dots[index]) {
+                    dots[index].classList.add('active');
                 }
             });
-        });
+        }
         
-        // Back to Top Button
-        const backToTop = document.getElementById('back-to-top');
+        const faqItems = document.querySelectorAll('.faq-item');
         
-        backToTop.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        if (faqItems.length) {
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                if (question) {
+                    question.addEventListener('click', () => {
+                        const isActive = item.classList.contains('active');
+                        
+                        faqItems.forEach(faqItem => {
+                            faqItem.classList.remove('active');
+                        });
+                        
+                        if (!isActive) {
+                            item.classList.add('active');
+                        }
+                    });
+                }
             });
-        });
+        }
         
-        // Smooth Scrolling for Navigation Links
+        if (backToTop) {
+            backToTop.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 if (this.getAttribute('href') !== '#') {
@@ -931,7 +914,7 @@
                     const targetElement = document.querySelector(targetId);
                     
                     if (targetElement) {
-                        const headerHeight = header.offsetHeight;
+                        const headerHeight = header ? header.offsetHeight : 0;
                         const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
                         
                         window.scrollTo({
@@ -939,8 +922,7 @@
                             behavior: 'smooth'
                         });
                         
-                        // Close mobile menu if open
-                        if (nav.classList.contains('active')) {
+                        if (nav && nav.classList.contains('active') && mobileMenuBtn) {
                             nav.classList.remove('active');
                             mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
                         }
