@@ -3,932 +3,762 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piggy - Personal Finance Made Simple</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="theme-color" content="#111827">
+    <meta name="description" content="Piggy Accounting is a WeiProduct personal finance app for expense tracking, budget awareness, bills, statistics, and AI-assisted money insights.">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Piggy Accounting | Personal Finance Tracking">
+    <meta property="og:description" content="A focused personal finance app for clearer spending, budgets, bills, and money habits.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://weiproduct.github.io/piggy-finance/">
+    <meta property="og:image" content="https://weiproduct.github.io/piggy-finance/images/piggy_logo.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Piggy Accounting | Personal Finance Tracking">
+    <meta name="twitter:description" content="Track spending, bills, budgets, and finance patterns with a focused WeiProduct mobile app.">
+    <meta name="twitter:image" content="https://weiproduct.github.io/piggy-finance/images/piggy_logo.png">
+    <link rel="canonical" href="https://weiproduct.github.io/piggy-finance/">
+    <link rel="icon" href="images/piggy_logo.png" type="image/png">
+    <title>Piggy Accounting | Personal Finance Tracking</title>
     <style>
         :root {
-            --primary: #FF6B6B;
-            --secondary: #4ECDC4;
-            --dark: #292F36;
-            --light: #F7FFF7;
-            --accent: #FFE66D;
+            --ink: #111827;
+            --muted: #536174;
+            --line: #e5e7eb;
+            --card: #ffffff;
+            --soft: #f8fafc;
+            --rose: #ef4444;
+            --coral: #fb7185;
+            --teal: #0f766e;
+            --amber: #f59e0b;
+            --shadow: 0 18px 50px rgba(17, 24, 39, 0.10);
+            --shadow-soft: 0 10px 24px rgba(17, 24, 39, 0.07);
         }
-        
+
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 88px;
+            background: var(--soft);
+        }
+
         body {
-            color: var(--dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 14% 10%, rgba(251, 113, 133, 0.14), transparent 30%),
+                radial-gradient(circle at 88% 22%, rgba(15, 118, 110, 0.12), transparent 34%),
+                #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
-        
-        header {
-            background-color: var(--primary);
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid rgba(239, 68, 68, 0.34);
+            outline-offset: 3px;
+        }
+
+        .container {
+            width: min(1120px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: -999px;
+            top: 12px;
+            z-index: 2000;
+            border-radius: 8px;
+            padding: 10px 14px;
+            background: var(--ink);
+            color: #ffffff;
+        }
+
+        .skip-link:focus {
+            left: 12px;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
             z-index: 1000;
+            border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(18px);
         }
-        
-        .logo {
+
+        .nav-inner {
+            display: flex;
+            min-height: 72px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-weight: 850;
+        }
+
+        .brand img {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .nav-links {
             display: flex;
             align-items: center;
-            color: white;
-            font-size: 28px;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-        
-        .logo:hover {
-            transform: scale(1.05);
-        }
-        
-        .logo img {
-            margin-right: 10px;
-        }
-        
-        nav ul {
-            display: flex;
+            gap: 26px;
             list-style: none;
         }
-        
-        nav ul li {
-            margin: 0 15px;
-        }
-        
-        nav ul li a {
-            color: white;
+
+        .nav-links a {
+            color: #374151;
+            font-size: 0.94rem;
+            font-weight: 700;
             text-decoration: none;
-            font-size: 16px;
-            position: relative;
-            padding-bottom: 5px;
         }
-        
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: white;
-            transition: width 0.3s ease;
+
+        .nav-links a:hover {
+            color: var(--rose);
         }
-        
-        nav ul li a:hover::after {
-            width: 100%;
+
+        .nav-cta {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 9px 12px;
+            background: #ffffff;
         }
-        
-        .get-started {
-            background-color: var(--accent);
-            color: var(--dark);
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+        section {
+            padding: 84px 0;
         }
-        
-        .get-started:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
-        }
-        
+
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            min-height: 100vh;
+            min-height: calc(100vh - 72px);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 120px 20px 50px;
-            color: white;
-            position: relative;
-            overflow: hidden;
+            padding: 64px 0;
         }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.72fr);
+            gap: 56px;
+            align-items: center;
+        }
+
+        .hero-copy {
+            min-width: 0;
+        }
+
+        .eyebrow {
+            color: var(--rose);
+            font-size: 0.78rem;
+            font-weight: 850;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        h3 {
+            letter-spacing: 0;
+        }
+
+        h1 {
+            max-width: 820px;
+            margin-top: 14px;
+            font-size: clamp(3.2rem, 7vw, 6.3rem);
+            line-height: 0.95;
+            text-wrap: balance;
+        }
+
+        .hero-copy > p:not(.eyebrow) {
+            max-width: 680px;
+            margin-top: 26px;
+            color: var(--muted);
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
+            overflow-wrap: anywhere;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        .btn {
+            display: inline-flex;
+            min-height: 48px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            padding: 12px 18px;
+            font-weight: 800;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            border: 1px solid var(--ink);
+            background: var(--ink);
+            color: #ffffff;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--line);
+            background: #ffffff;
+            color: var(--ink);
+        }
+
+        .hero-panel {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.84);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(18px);
+        }
+
+        .app-icon {
+            width: 116px;
+            height: 116px;
+            border-radius: 28px;
+            box-shadow: 0 18px 42px rgba(239, 68, 68, 0.18);
+        }
+
+        .panel-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .panel-metrics div {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px;
+            background: #ffffff;
+        }
+
+        .panel-metrics strong,
+        .panel-metrics span {
+            display: block;
+        }
+
+        .panel-metrics strong {
+            font-size: 1.35rem;
+        }
+
+        .panel-metrics span {
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .section-heading {
+            max-width: 760px;
+            margin-bottom: 38px;
+        }
+
+        .section-heading h2 {
+            margin-top: 10px;
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            line-height: 1.05;
+        }
+
+        .section-heading p:not(.eyebrow) {
+            margin-top: 16px;
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .features,
+        .screenshots {
+            background: rgba(255, 255, 255, 0.78);
+        }
+
+        .feature-grid,
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .feature-card,
+        .trust-card,
+        .support-card {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 22px;
+            background: #ffffff;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .feature-card span,
+        .trust-card span {
+            display: inline-flex;
+            width: 38px;
+            height: 38px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: #fff1f2;
+            color: var(--rose);
+            font-weight: 900;
+        }
+
+        .feature-card h3,
+        .trust-card h3,
+        .support-card h3 {
+            margin-top: 18px;
+            font-size: 1.18rem;
+            line-height: 1.25;
+        }
+
+        .feature-card p,
+        .trust-card p,
+        .support-card p {
+            margin-top: 10px;
+            color: var(--muted);
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .screenshot-card {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px;
+            background: #ffffff;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .screenshot-card img {
+            width: 100%;
+            border-radius: 8px;
+            aspect-ratio: 1206 / 2622;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .screenshot-card p {
+            margin-top: 12px;
+            color: #374151;
+            font-weight: 750;
+        }
+
+        .demo {
+            background: var(--soft);
+        }
+
+        .video-frame {
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #000000;
+            box-shadow: var(--shadow);
+            aspect-ratio: 16 / 9;
+        }
+
+        .video-frame iframe {
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-            background-size: cover;
+            border: 0;
         }
-        
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 30px;
-            max-width: 800px;
-            animation: fadeInUp 1s ease;
+
+        .support {
+            background: #111827;
+            color: #ffffff;
         }
-        
-        .hero p {
-            font-size: 20px;
-            max-width: 700px;
-            margin-bottom: 40px;
-            animation: fadeInUp 1.2s ease;
+
+        .support-layout {
+            display: grid;
+            grid-template-columns: 1fr minmax(280px, 0.6fr);
+            gap: 40px;
+            align-items: start;
         }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            animation: fadeInUp 1.4s ease;
+
+        .support .eyebrow {
+            color: #fca5a5;
         }
-        
-        .download-btn {
-            background-color: var(--accent);
-            color: var(--dark);
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
+
+        .support h2 {
+            margin-top: 10px;
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            line-height: 1.05;
         }
-        
-        .download-btn i {
-            margin-right: 8px;
+
+        .support p {
+            margin-top: 16px;
+            color: #cbd5e1;
         }
-        
-        .download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+
+        .support-card {
+            background: #ffffff;
+            color: var(--ink);
         }
-        
-        .learn-more-btn {
-            background-color: transparent;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-            border: 2px solid white;
-            transition: all 0.3s ease;
+
+        .support-card a {
+            display: block;
+            margin-top: 12px;
+            color: var(--rose);
+            font-weight: 800;
+            overflow-wrap: anywhere;
+        }
+
+        .footer {
+            border-top: 1px solid #1f2937;
+            background: #111827;
+            color: #cbd5e1;
+            padding: 28px 0;
+        }
+
+        .footer-layout {
             display: flex;
             align-items: center;
-        }
-        
-        .learn-more-btn i {
-            margin-right: 8px;
-        }
-        
-        .learn-more-btn:hover {
-            background-color: rgba(255,255,255,0.1);
-            transform: translateY(-3px);
-        }
-        
-        .features {
-            padding: 80px 20px;
-            background-color: var(--light);
-            text-align: center;
-        }
-        
-        .features h2 {
-            font-size: 36px;
-            margin-bottom: 50px;
-            color: var(--dark);
-        }
-        
-        .features-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .feature-card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            flex: 1 1 300px;
-            max-width: 350px;
-            transition: transform 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .feature-icon {
-            font-size: 40px;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        .feature-card h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-        
-        .feature-card p {
-            color: #666;
-            font-size: 16px;
-        }
-        
-        .how-it-works {
-            padding: 80px 20px;
-            background-color: white;
-            text-align: center;
-        }
-        
-        .how-it-works .section-title h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
-        
-        .how-it-works .section-title p {
-            max-width: 700px;
-            margin: 0 auto 50px;
-            color: #666;
-        }
-        
-        .steps-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto 40px;
-        }
-        
-        .step {
-            background-color: var(--light);
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            flex: 1 1 300px;
-            max-width: 350px;
-            position: relative;
-            transition: transform 0.3s ease;
-        }
-        
-        .step:hover {
-            transform: translateY(-10px);
-        }
-        
-        .step-number {
-            background-color: var(--primary);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            font-weight: bold;
-            margin: 0 auto 20px;
-        }
-        
-        .step h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-        
-        .step p {
-            color: #666;
-            font-size: 16px;
-        }
-        
-        .app-showcase {
-            margin-top: 60px;
-            text-align: center;
-        }
-        
-        .app-showcase h3 {
-            font-size: 28px;
-            margin-bottom: 30px;
-            color: var(--dark);
-        }
-        
-        .app-screenshots {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .screenshot {
-            flex: 0 1 300px;
-            margin-bottom: 30px;
-            transition: transform 0.3s ease;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            background-color: white;
-        }
-        
-        .screenshot:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-        
-        .screenshot img {
-            width: 100%;
-            height: auto;
-            border-top-left-radius: 16px;
-            border-top-right-radius: 16px;
-            border: 1px solid #eee;
-        }
-        
-        .screenshot p {
-            padding: 15px 10px;
-            margin: 0;
-            font-weight: bold;
-            color: var(--dark);
-            font-size: 16px;
-        }
-        
-        @media (max-width: 768px) {
-            .app-screenshots {
-                gap: 15px;
-            }
-            
-            .screenshot {
-                flex: 0 1 45%;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .app-screenshots {
-                gap: 10px;
-            }
-            
-            .screenshot {
-                flex: 0 1 100%;
-            }
-        }
-        
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
             justify-content: space-between;
+            gap: 20px;
         }
-        
-        .footer-logo {
-            flex: 1 1 300px;
-            margin-bottom: 20px;
-        }
-        
-        .footer-logo h3 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .footer-links {
-            flex: 1 1 300px;
-            margin-bottom: 20px;
-        }
-        
-        .footer-links h4 {
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-        
-        .footer-links ul {
-            list-style: none;
-        }
-        
-        .footer-links ul li {
-            margin-bottom: 8px;
-        }
-        
-        .footer-links ul li a {
-            color: #ccc;
+
+        .footer a {
+            color: #ffffff;
+            font-weight: 750;
             text-decoration: none;
-            transition: color 0.3s ease;
         }
-        
-        .footer-links ul li a:hover {
-            color: var(--accent);
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-links a {
-            color: white;
-            font-size: 20px;
-            transition: color 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            color: var(--accent);
-        }
-        
-        .copyright {
-            margin-top: 30px;
-            color: #aaa;
-            font-size: 14px;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+                animation: none !important;
             }
         }
-        
-        @media (max-width: 768px) {
-            header {
-                padding: 15px 20px;
+
+        @media (max-width: 900px) {
+            .hero-layout,
+            .support-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid,
+            .trust-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .screenshot-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 680px) {
+            .container {
+                width: min(100% - 28px, 1120px);
+            }
+
+            .nav-inner {
+                display: block;
+                padding: 12px 0;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 14px;
+                margin-top: 12px;
+            }
+
+            section {
+                padding: 64px 0;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 48px 0 64px;
+            }
+
+            h1 {
+                font-size: clamp(2.25rem, 10vw, 3rem);
+                line-height: 1;
+                text-wrap: normal;
+            }
+
+            .hero-actions,
+            .btn {
+                width: 100%;
+            }
+
+            .hero-copy > p:not(.eyebrow) {
+                max-width: 31ch;
+                font-size: 1rem;
+            }
+
+            .feature-grid,
+            .trust-grid,
+            .screenshot-grid,
+            .panel-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-layout {
                 flex-direction: column;
-            }
-            
-            .logo {
-                margin-bottom: 15px;
-            }
-            
-            nav ul {
-            margin-bottom: 15px;
-            }
-            
-            .hero h1 {
-                font-size: 36px;
-            }
-            
-            .hero p {
-                font-size: 18px;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                width: 80%;
-            }
-            
-            .features-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                align-items: center;
+                align-items: flex-start;
             }
         }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Piggy Accounting",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "iOS",
+      "url": "https://weiproduct.github.io/piggy-finance/",
+      "image": "https://weiproduct.github.io/piggy-finance/images/piggy_logo.png",
+      "publisher": {
+        "@type": "Organization",
+        "name": "WeiProduct",
+        "url": "https://weiproduct.com/"
+      },
+      "description": "Piggy Accounting is a personal finance app for expense tracking, budget awareness, bills, statistics, and AI-assisted money insights."
+    }
+    </script>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="images/piggy_logo.png" alt="Piggy Logo" style="width: 40px; height: 40px; margin-right: 10px;">
-            <span>Piggy</span>
-        </div>
-        <nav>
-            <ul>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <nav class="navbar" aria-label="Primary navigation">
+        <div class="container nav-inner">
+            <a class="brand" href="#main" aria-label="Piggy Accounting home">
+                <img src="images/piggy_logo.png" alt="" width="42" height="42">
+                <span>Piggy Accounting</span>
+            </a>
+            <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
-                <li><a href="#for-you">For You</a></li>
-                <li><a href="#why-piggy">Why Piggy</a></li>
+                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="#support" class="nav-cta">Support</a></li>
             </ul>
-        </nav>
-        <a href="#" class="get-started">Get Started</a>
-    </header>
-    
-    <section class="hero">
-        <h1>Take Control of Your Finances</h1>
-        <p>Piggy makes personal finance simple and intuitive. Track expenses, set budgets, and achieve your financial goals with minimal effort.</p>
-        <div class="cta-buttons">
-            <a href="#" class="download-btn"><i class="fas fa-download"></i> Download Now</a>
-            <a href="#" class="learn-more-btn"><i class="fas fa-info-circle"></i> Learn More</a>
         </div>
-    </section>
-    
-    <section id="features" class="features">
-        <h2>Why Choose Piggy?</h2>
-        <div class="features-container">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-chart-pie"></i>
-                </div>
-                <h3>Smart Budgeting</h3>
-                <p>Create personalized budgets based on your spending habits and financial goals. Piggy helps you stay on track with intelligent alerts and recommendations.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-lock"></i>
-                </div>
-                <h3>Secure & Private</h3>
-                <p>Your financial data is encrypted and never shared. We prioritize your privacy and security above all else with bank-level encryption.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
-                <h3>Anywhere, Anytime</h3>
-                <p>Access your finances on any device. Sync across all your devices for a seamless experience wherever you go, even offline.</p>
-            </div>
-        </div>
-    </section>
-    
-    <section id="how-it-works" class="how-it-works">
-        <div class="container">
-            <div class="section-title">
-                <h2>How Piggy Works</h2>
-                <p>Getting started with Piggy is easy. Follow these simple steps to take control of your finances.</p>
-            </div>
-            <div class="steps-container">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Download & Sign Up</h3>
-                    <p>Download Piggy from your app store and create an account in less than 2 minutes. No credit card required.</p>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Connect Your Accounts</h3>
-                    <p>Securely connect your bank accounts and credit cards to automatically import and categorize transactions.</p>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Set Goals & Save</h3>
-                    <p>Create financial goals, track your progress, and watch your savings grow with personalized insights.</p>
-                </div>
-            </div>
-            
-            <div class="app-showcase">
-                <h3>App Features</h3>
-                <div class="app-screenshots">
-                    <div class="screenshot">
-                        <img src="app_screenshots/IMG_5863.PNG" alt="Piggy App Home Screen">
-                        <p>Home Dashboard</p>
-                    </div>
-                    <div class="screenshot">
-                        <img src="app_screenshots/IMG_5864.PNG" alt="Piggy App Bills Screen">
-                        <p>Bills Tracking</p>
-                    </div>
-                    <div class="screenshot">
-                        <img src="app_screenshots/IMG_5865.PNG" alt="Piggy App Add Transaction">
-                        <p>Add Transactions</p>
-                    </div>
-                    <div class="screenshot">
-                        <img src="app_screenshots/IMG_5867.PNG" alt="Piggy App Statistics">
-                        <p>Statistics & Analysis</p>
-                    </div>
-                    <div class="screenshot">
-                        <img src="app_screenshots/IMG_5868.PNG" alt="Piggy App Profile">
-                        <p>User Profile</p>
-                    </div>
-                    <div class="screenshot">
-                        <img src="app_screenshots/IMG_5869.PNG" alt="Piggy App AI Analysis">
-                        <p>Financial Intelligence</p>
-                    </div>
-                    <div class="screenshot">
-                        <img src="app_screenshots/IMG_5870.PNG" alt="Piggy App Smart Recommendations">
-                        <p>Smart Recommendations</p>
-                    </div>
-                    <div class="screenshot">
-                        <img src="app_screenshots/IMG_5871.PNG" alt="Piggy App Chinese Interface">
-                        <p>Multi-language Support</p>
-                    </div>
-                    <div class="screenshot">
-                        <img src="app_screenshots/IMG_5872.PNG" alt="Piggy App Expense Categories">
-                        <p>Expense Categories</p>
+    </nav>
+
+    <main id="main">
+        <section class="hero">
+            <div class="container hero-layout">
+                <div class="hero-copy">
+                    <p class="eyebrow">WeiProduct finance app</p>
+                    <h1>Personal finance made easier to understand.</h1>
+                    <p>Piggy Accounting helps people track spending, organize bills, review categories, and build clearer money habits from a focused mobile workflow.</p>
+                    <div class="hero-actions">
+                        <a href="#screenshots" class="btn btn-primary">View product screenshots</a>
+                        <a href="mailto:1597498880weiproduct@gmail.com?subject=Piggy%20Accounting%20support" class="btn btn-secondary">Contact support</a>
                     </div>
                 </div>
-                
-                <div class="video-showcase" style="margin-top: 40px; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto;">
-                    <h3>Watch Piggy in Action</h3>
-                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/AeWkUFS3Rqc" title="Piggy Finance App Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>What Our Users Say</h2>
-                <p>Join thousands of satisfied users who have transformed their financial lives with Piggy.</p>
-            </div>
-            <div class="testimonials-container">
-                <div class="testimonial-slides" id="testimonial-slides">
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-content">Piggy has completely changed how I manage my money. The intuitive interface and smart budgeting features helped me save for my dream vacation in just 6 months!</p>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">
-                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIzMCIgZmlsbD0iI2VlZSIvPjxjaXJjbGUgY3g9IjMwIiBjeT0iMjIiIHI9IjEwIiBmaWxsPSIjYWFhIi8+PHBhdGggZD0iTTEwLDQ4QzE1LDM1IDQ1LDM1IDUwLDQ4QzQ1LDYwIDE1LDYwIDEwLDQ4WiIgZmlsbD0iI2FhYSIvPjwvc3ZnPg==" alt="User Avatar">
-                                </div>
-                                <div class="author-info">
-                                    <h4>Sarah Johnson</h4>
-                                    <p>Marketing Manager</p>
-                                </div>
-                            </div>
+                <aside class="hero-panel" aria-label="Product summary">
+                    <img class="app-icon" src="images/piggy_logo.png" alt="Piggy Accounting app icon" width="116" height="116">
+                    <div class="panel-metrics">
+                        <div>
+                            <strong>Finance</strong>
+                            <span>Expense and budget awareness</span>
+                        </div>
+                        <div>
+                            <strong>AI</strong>
+                            <span>Insight-oriented product surface</span>
+                        </div>
+                        <div>
+                            <strong>9</strong>
+                            <span>Public product screenshots</span>
+                        </div>
+                        <div>
+                            <strong>iOS</strong>
+                            <span>Mobile-first workflow</span>
                         </div>
                     </div>
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-content">As someone who always struggled with finances, Piggy made it simple to understand where my money was going. I've paid off $5,000 in debt in just 3 months!</p>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">
-                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIzMCIgZmlsbD0iI2VlZSIvPjxjaXJjbGUgY3g9IjMwIiBjeT0iMjIiIHI9IjEwIiBmaWxsPSIjYWFhIi8+PHBhdGggZD0iTTEwLDQ4QzE1LDM1IDQ1LDM1IDUwLDQ4QzQ1LDYwIDE1LDYwIDEwLDQ4WiIgZmlsbD0iI2FhYSIvPjwvc3ZnPg==" alt="User Avatar">
-                                </div>
-                                <div class="author-info">
-                                    <h4>Michael Chen</h4>
-                                    <p>Software Developer</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <div class="testimonial-card">
-                            <p class="testimonial-content">The visual reports in Piggy make it so easy to see where I can cut expenses. I've increased my monthly savings by 30% since I started using the app!</p>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">
-                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIzMCIgZmlsbD0iI2VlZSIvPjxjaXJjbGUgY3g9IjMwIiBjeT0iMjIiIHI9IjEwIiBmaWxsPSIjYWFhIi8+PHBhdGggZD0iTTEwLDQ4QzE1LDM1IDQ1LDM1IDUwLDQ4QzQ1LDYwIDE1LDYwIDEwLDQ4WiIgZmlsbD0iI2FhYSIvPjwvc3ZnPg==" alt="User Avatar">
-                                </div>
-                                <div class="author-info">
-                                    <h4>Emily Rodriguez</h4>
-                                    <p>Teacher</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Core workflow</p>
+                    <h2>Built around recurring money decisions.</h2>
+                    <p>The product focuses on the moments where personal finance apps need to be fast: capturing expenses, reviewing bills, checking categories, and understanding patterns.</p>
                 </div>
-                <div class="testimonial-dots" id="testimonial-dots">
-                    <span class="dot active" data-slide="0"></span>
-                    <span class="dot" data-slide="1"></span>
-                    <span class="dot" data-slide="2"></span>
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <span>01</span>
+                        <h3>Expense tracking</h3>
+                        <p>Record transactions and make spending visible across everyday categories.</p>
+                    </article>
+                    <article class="feature-card">
+                        <span>02</span>
+                        <h3>Bills and reminders</h3>
+                        <p>Keep upcoming payments and recurring obligations easier to review.</p>
+                    </article>
+                    <article class="feature-card">
+                        <span>03</span>
+                        <h3>Statistics and trends</h3>
+                        <p>Use visual summaries to understand where money is going over time.</p>
+                    </article>
+                    <article class="feature-card">
+                        <span>04</span>
+                        <h3>AI-assisted insight</h3>
+                        <p>Explore finance patterns through a product surface designed for clearer recommendations.</p>
+                    </article>
+                    <article class="feature-card">
+                        <span>05</span>
+                        <h3>Multi-language surface</h3>
+                        <p>Support for English and Chinese interface needs across the product experience.</p>
+                    </article>
+                    <article class="feature-card">
+                        <span>06</span>
+                        <h3>Focused mobile design</h3>
+                        <p>Designed for quick checks, quick entry, and repeated personal finance habits.</p>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <section class="newsletter">
-        <div class="newsletter-container">
-            <h2>Stay Updated</h2>
-            <p>Subscribe to our newsletter for financial tips, app updates, and exclusive offers.</p>
-            <form class="newsletter-form">
-                <input type="email" placeholder="Enter your email address" required>
-                <button type="submit">Subscribe</button>
-            </form>
-        </div>
-    </section>
-    
-    <section id="faq" class="faq">
-        <div class="container">
-            <div class="section-title">
-                <h2>Frequently Asked Questions</h2>
-                <p>Find answers to common questions about Piggy and personal finance management.</p>
-            </div>
-            <div class="faq-container">
-                <div class="faq-item active">
-                    <div class="faq-question">
-                        Is my financial data secure with Piggy? <span><i class="fas fa-chevron-down"></i></span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Absolutely! Piggy uses bank-level 256-bit encryption to protect your data. We never store your bank credentials, and all information is transmitted using secure connections. Your privacy and security are our top priorities.</p>
-                    </div>
+        </section>
+
+        <section class="trust">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Product principles</p>
+                    <h2>Clear, practical, and easy to return to.</h2>
                 </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        How much does Piggy cost? <span><i class="fas fa-chevron-down"></i></span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Piggy offers a free basic plan that includes expense tracking, budgeting, and basic reports. Our Premium plan ($4.99/month) unlocks advanced features like investment tracking, goal planning, and personalized financial insights.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Can I connect multiple bank accounts? <span><i class="fas fa-chevron-down"></i></span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes! Piggy supports connections to over 10,000 financial institutions worldwide. You can connect multiple bank accounts, credit cards, investment accounts, and loans to get a complete picture of your finances.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        How do I get started with Piggy? <span><i class="fas fa-chevron-down"></i></span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Getting started is easy! Download the app from your device's app store, create an account, and follow the guided setup process. You can be up and running in less than 5 minutes.</p>
-                    </div>
+                <div class="trust-grid">
+                    <article class="trust-card">
+                        <span>A</span>
+                        <h3>Reduce financial friction</h3>
+                        <p>The app prioritizes fast capture and readable summaries over complicated setup.</p>
+                    </article>
+                    <article class="trust-card">
+                        <span>B</span>
+                        <h3>Make patterns visible</h3>
+                        <p>Charts, categories, and statistics turn isolated transactions into usable context.</p>
+                    </article>
+                    <article class="trust-card">
+                        <span>C</span>
+                        <h3>Support better habits</h3>
+                        <p>The goal is not just tracking money, but helping people notice behavior they can change.</p>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <footer>
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <div class="footer-logo">
-                        <span>🐷</span> Piggy
-                    </div>
-                    <p class="footer-about">Piggy is a personal finance app designed to help you take control of your money, track expenses, and achieve your financial goals.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
+        </section>
+
+        <section id="screenshots" class="screenshots">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Screenshots</p>
+                    <h2>Real product surface.</h2>
+                    <p>Public screenshots show the current product areas across dashboard, bills, transactions, profile, AI analysis, and category views.</p>
                 </div>
-                
-                <div class="footer-column">
-                    <h3 class="footer-title">Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
-                        <li><a href="#features"><i class="fas fa-chevron-right"></i> Features</a></li>
-                        <li><a href="#how-it-works"><i class="fas fa-chevron-right"></i> How It Works</a></li>
-                        <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Testimonials</a></li>
-                        <li><a href="#faq"><i class="fas fa-chevron-right"></i> FAQ</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3 class="footer-title">Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Help Center</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Cookie Policy</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3 class="footer-title">Contact Us</h3>
-                    <ul class="contact-info">
-                        <li><i class="fas fa-map-marker-alt"></i> Fieldstone Slate, Amherst, Massachusetts 01003</li>
-                        <li><i class="fas fa-phone-alt"></i> (413) 472-7021</li>
-                        <li><i class="fas fa-envelope"></i> 1597498880fw@gmail.com</li>
-                    </ul>
+                <div class="screenshot-grid">
+                    <article class="screenshot-card">
+                        <img src="app_screenshots/IMG_5863.PNG" alt="Piggy dashboard screen" width="1206" height="2622" loading="lazy">
+                        <p>Financial dashboard</p>
+                    </article>
+                    <article class="screenshot-card">
+                        <img src="app_screenshots/IMG_5864.PNG" alt="Piggy bills tracking screen" width="1206" height="2622" loading="lazy">
+                        <p>Bills tracking</p>
+                    </article>
+                    <article class="screenshot-card">
+                        <img src="app_screenshots/IMG_5865.PNG" alt="Piggy add transaction screen" width="1206" height="2622" loading="lazy">
+                        <p>Add transactions</p>
+                    </article>
+                    <article class="screenshot-card">
+                        <img src="app_screenshots/IMG_5867.PNG" alt="Piggy statistics screen" width="1206" height="2622" loading="lazy">
+                        <p>Statistics and analysis</p>
+                    </article>
+                    <article class="screenshot-card">
+                        <img src="app_screenshots/IMG_5869.PNG" alt="Piggy AI analysis screen" width="1206" height="2622" loading="lazy">
+                        <p>AI analysis</p>
+                    </article>
+                    <article class="screenshot-card">
+                        <img src="app_screenshots/IMG_5872.PNG" alt="Piggy expense categories screen" width="1206" height="2622" loading="lazy">
+                        <p>Expense categories</p>
+                    </article>
                 </div>
             </div>
-            
-            <div class="footer-bottom">
-                <p class="copyright">&copy; 2025 Piggy Finance. All rights reserved.</p>
+        </section>
+
+        <section class="demo">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Demo</p>
+                    <h2>Watch the app in motion.</h2>
+                </div>
+                <div class="video-frame">
+                    <iframe src="https://www.youtube.com/embed/AeWkUFS3Rqc" title="Piggy Accounting app demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
             </div>
+        </section>
+
+        <section id="support" class="support">
+            <div class="container support-layout">
+                <div>
+                    <p class="eyebrow">Support</p>
+                    <h2>Questions, feedback, and product support.</h2>
+                    <p>Piggy Accounting is part of the WeiProduct portfolio of focused consumer AI and mobile utility products.</p>
+                </div>
+                <div class="support-card">
+                    <h3>Contact WeiProduct</h3>
+                    <p>For support, product questions, privacy requests, or partnership conversations, contact the WeiProduct team.</p>
+                    <a href="mailto:1597498880weiproduct@gmail.com?subject=Piggy%20Accounting%20support">1597498880weiproduct@gmail.com</a>
+                    <a href="https://weiproduct.com/">WeiProduct company site</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-layout">
+            <p>&copy; <span id="year">2026</span> WeiProduct. All rights reserved.</p>
+            <a href="https://weiproduct.com/">weiproduct.com</a>
         </div>
     </footer>
-    
-    <a href="#" class="back-to-top" id="back-to-top">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-    
+
     <script>
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const nav = document.getElementById('nav');
-        
-        if (mobileMenuBtn && nav) {
-            mobileMenuBtn.addEventListener('click', () => {
-                nav.classList.toggle('active');
-                mobileMenuBtn.innerHTML = nav.classList.contains('active') 
-                    ? '<i class="fas fa-times"></i>' 
-                    : '<i class="fas fa-bars"></i>';
-            });
+        const year = document.getElementById('year');
+        if (year) {
+            year.textContent = new Date().getFullYear();
         }
-        
-        const header = document.getElementById('header');
-        const backToTop = document.getElementById('back-to-top');
-        
-        window.addEventListener('scroll', () => {
-            if (header && backToTop) {
-                if (window.scrollY > 100) {
-                    header.classList.add('scrolled');
-                    backToTop.classList.add('show');
-                } else {
-                    header.classList.remove('scrolled');
-                    backToTop.classList.remove('show');
-                }
-            }
-        });
-        
-        const testimonialSlides = document.getElementById('testimonial-slides');
-        const dots = document.querySelectorAll('.dot');
-        
-        if (testimonialSlides && dots.length) {
-            dots.forEach(dot => {
-                dot.addEventListener('click', () => {
-                    const slideIndex = dot.getAttribute('data-slide');
-                    testimonialSlides.scrollTo({
-                        left: testimonialSlides.offsetWidth * slideIndex,
-                        behavior: 'smooth'
-                    });
-                    
-                    dots.forEach(d => d.classList.remove('active'));
-                    dot.classList.add('active');
-                });
-            });
-            
-            testimonialSlides.addEventListener('scroll', () => {
-                const index = Math.round(testimonialSlides.scrollLeft / testimonialSlides.offsetWidth);
-                dots.forEach(d => d.classList.remove('active'));
-                if (dots[index]) {
-                    dots[index].classList.add('active');
-                }
-            });
-        }
-        
-        const faqItems = document.querySelectorAll('.faq-item');
-        
-        if (faqItems.length) {
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                
-                if (question) {
-                    question.addEventListener('click', () => {
-                        const isActive = item.classList.contains('active');
-                        
-                        faqItems.forEach(faqItem => {
-                            faqItem.classList.remove('active');
-                        });
-                        
-                        if (!isActive) {
-                            item.classList.add('active');
-                        }
-                    });
-                }
-            });
-        }
-        
-        if (backToTop) {
-            backToTop.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        }
-        
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        const headerHeight = header ? header.offsetHeight : 0;
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                        
-                        if (nav && nav.classList.contains('active') && mobileMenuBtn) {
-                            nav.classList.remove('active');
-                            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                        }
-                    }
-                }
-            });
+
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            const rel = new Set((link.rel || '').split(/\s+/).filter(Boolean));
+            rel.add('noopener');
+            rel.add('noreferrer');
+            link.rel = Array.from(rel).join(' ');
         });
     </script>
 </body>
