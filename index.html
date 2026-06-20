@@ -367,10 +367,11 @@
 
         .screenshot-card img {
             width: 100%;
+            height: clamp(420px, 52vw, 560px);
             border-radius: 8px;
-            aspect-ratio: 1206 / 2622;
-            object-fit: cover;
-            object-position: top;
+            background: #f8fafc;
+            object-fit: contain;
+            object-position: center top;
         }
 
         .screenshot-card p {
