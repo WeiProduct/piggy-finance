@@ -37,7 +37,48 @@ const I18N = {
     q5: 'Which devices are supported?', a5: 'Piggy Accounting is a native iOS app available for iPhone on the App Store.',
     downloadTitle: 'Start tracking your money today', downloadSubtitle: 'Download Piggy Accounting free on the App Store.', downloadNote: 'Available on iPhone · English & 中文',
     footerRights: 'Piggy Accounting. All rights reserved.', footerMadeBy: 'Built by WeiProduct',
-    stickySub: 'Personal finance · Free', stickyGet: 'Get'
+    stickySub: 'Personal finance · Free', stickyGet: 'Get',
+    howEyebrow: 'How it works', featuresEyebrow: 'Features', screenshotsEyebrow: 'Screenshots', faqEyebrow: 'FAQ',
+    tryEyebrow: 'Try it', tryTitle: 'Try a quick entry',
+    trySub: 'Tap a few presets — watch the ledger, the budget ring and the AI tip react instantly.',
+    tryPresets: 'Tap to record',
+    tryChipCoffee: 'Coffee', tryChipTransport: 'Transport', tryChipDining: 'Dining', tryChipGroceries: 'Groceries', tryChipSalary: 'Salary',
+    tryUndo: 'Undo last', tryCaption: 'Interactive demo — no data leaves this page.',
+    tryBudgetLabel: 'of ¥1,500 monthly budget', tryLedgerTitle: 'Recent entries',
+    tryLedgerEmpty: 'Tap a chip to record your first entry', tryAiLabel: 'AI tip',
+    tryTipStart: 'Log a few entries — I’ll start spotting patterns right away.',
+    tryTipIncome: 'Salary logged. Nice — your savings rate this month just got much clearer.',
+    tryTipBudget: 'Heads up: you’ve used over half of the ¥1,500 monthly budget.',
+    tryTipTop: '{cat} is your top spending category so far — want to set a cap for it?',
+    personasEyebrow: 'Who it’s for', personasTitle: 'Made for your money life',
+    personasSub: 'Different lives, same need — knowing where the money goes.',
+    persona1Title: 'Students', persona1Desc: 'Stretch a monthly allowance with the budget ring — see what’s left before the weekend, not after.', persona1Tag: 'Budget',
+    persona2Title: 'Young professionals', persona2Desc: 'Rent, subscriptions, salary day — keep every bill in one list you can check in an elevator ride.', persona2Tag: 'Bills',
+    persona3Title: 'Households', persona3Desc: 'Category charts show where the family money actually goes — groceries, utilities, and the rest.', persona3Tag: 'Statistics',
+    persona4Title: 'Freelancers', persona4Desc: 'Uneven income months? AI analysis reads your real savings rate across the ups and downs.', persona4Tag: 'AI analysis',
+    methodEyebrow: 'The method', methodTitle: 'How three taps become financial insight',
+    methodSub: 'Under the simple surface there’s a pipeline that turns raw entries into advice you can act on.',
+    methodN1Title: 'Entry', methodN1Desc: 'Amount, category, note — a couple of taps and it’s recorded.',
+    methodN2Title: 'Auto-categorized', methodN2Desc: 'Every entry lands in a clean, browsable category history.',
+    methodN3Title: 'Charts & budget', methodN3Desc: 'Pie, bar and trend charts plus your budget ring update instantly.',
+    methodN4Title: 'AI plain-language analysis', methodN4Desc: 'AI reads the numbers and answers the real question: where did the money go?',
+    methodQuoteLabel: 'Sample in-app insight',
+    methodQuote: '“You saved 23% of income this month — mostly from lower dining spend.”',
+    compareEyebrow: 'Compare', compareTitle: 'Why not just a spreadsheet?',
+    compareSub: 'An honest look at the tools people actually use for money.',
+    cmpH0: 'Scenario', cmpH1: 'Piggy Accounting', cmpH2: 'Spreadsheet', cmpH3: 'Mental math',
+    cmpR1: 'Logging one expense', cmpR1a: 'A couple of taps', cmpR1b: 'Open laptop, find the row', cmpR1c: 'Forgotten by dinner',
+    cmpR2: 'Spotting category patterns', cmpR2a: 'Automatic charts', cmpR2b: 'Manual formulas',
+    cmpR3: 'Monthly budget check', cmpR3a: 'Live budget ring', cmpR3b: 'Update it yourself', cmpR3c: 'A rough guess',
+    cmpR4: 'Plain-language advice', cmpR4a: 'AI analysis built in',
+    cmpR5: 'EN / 中文 interface', cmpR5a: 'Both, switch anytime',
+    cmpNote: 'Qualitative comparison based on typical day-to-day use.',
+    q6: 'Why not just use a spreadsheet?', a6: 'Spreadsheets work, but they live on your laptop. Piggy Accounting is in your pocket: logging takes a couple of taps, charts build themselves, and AI analysis explains the numbers in plain language.',
+    mq1: 'Dining', mq2: 'Transport', mq3: 'Shopping', mq4: 'Housing', mq5: 'Entertainment',
+    mq6: 'Healthcare', mq7: 'Education', mq8: 'Travel', mq9: 'Salary', mq10: 'Investment',
+    footerTag: 'Personal finance, made clear — free on iPhone.',
+    footProduct: 'Product', footSupport: 'Support', footPrefs: 'Preferences',
+    footContact: 'Contact us', footAppStore: 'App Store page', footTheme: 'Toggle theme'
   },
   'zh-CN': {
     skip: '跳到主要内容',
@@ -76,7 +117,48 @@ const I18N = {
     q5: '支持哪些设备？', a5: '小猪记账是原生 iOS 应用，可在 App Store 为 iPhone 下载。',
     downloadTitle: '从今天起，管好每一笔钱', downloadSubtitle: '在 App Store 免费下载小猪记账。', downloadNote: '支持 iPhone · 中英双语',
     footerRights: '小猪记账. 保留所有权利。', footerMadeBy: 'Built by WeiProduct',
-    stickySub: '个人记账 · 免费', stickyGet: '获取'
+    stickySub: '个人记账 · 免费', stickyGet: '获取',
+    howEyebrow: '使用流程', featuresEyebrow: '功能特点', screenshotsEyebrow: '应用截图', faqEyebrow: '常见问题',
+    tryEyebrow: '试一试', tryTitle: '试着记一笔',
+    trySub: '点一点下面的预设标签，看账本、预算环和 AI 提示如何实时变化。',
+    tryPresets: '点一下即可记账',
+    tryChipCoffee: '咖啡', tryChipTransport: '交通', tryChipDining: '餐饮', tryChipGroceries: '买菜', tryChipSalary: '工资',
+    tryUndo: '撤销上一笔', tryCaption: '互动演示——数据不会离开此页面。',
+    tryBudgetLabel: '本月预算 ¥1,500 已用', tryLedgerTitle: '最近记录',
+    tryLedgerEmpty: '点一下左侧标签，记下第一笔', tryAiLabel: 'AI 提示',
+    tryTipStart: '先记几笔试试——我马上帮你发现规律。',
+    tryTipIncome: '工资已入账。很好——本月的储蓄情况一下子清晰多了。',
+    tryTipBudget: '提醒：¥1,500 的月度预算已经用掉一半以上了。',
+    tryTipTop: '目前「{cat}」是你最大的支出——要不要给它设个上限？',
+    personasEyebrow: '适合谁用', personasTitle: '适合每一种花钱的日子',
+    personasSub: '生活方式各不相同，需求却一样——知道钱花在了哪儿。',
+    persona1Title: '学生党', persona1Desc: '用预算进度环把生活费花得明明白白——周末前就知道还剩多少，而不是周末后。', persona1Tag: '预算',
+    persona2Title: '上班族', persona2Desc: '房租、订阅、发薪日——所有账单一处理清，坐电梯的功夫就能看完。', persona2Tag: '账单',
+    persona3Title: '家庭账本', persona3Desc: '分类图表看清家庭开销的真实去向——买菜、水电，以及其他种种。', persona3Tag: '统计',
+    persona4Title: '自由职业', persona4Desc: '收入时高时低？AI 分析帮你读懂波动背后的真实储蓄率。', persona4Tag: 'AI 分析',
+    methodEyebrow: '工作原理', methodTitle: '三次点击，变成一份财务洞察',
+    methodSub: '简单界面之下，是一条把原始记录变成可行建议的流水线。',
+    methodN1Title: '记一笔', methodN1Desc: '金额、分类、备注——点几下就记录完成。',
+    methodN2Title: '自动归类', methodN2Desc: '每一笔都归入清晰、可回溯的分类账目。',
+    methodN3Title: '图表与预算', methodN3Desc: '饼图、柱状图、趋势线和预算进度环即时更新。',
+    methodN4Title: 'AI 通俗分析', methodN4Desc: 'AI 读懂数字，回答那个真正的问题：钱都去哪儿了？',
+    methodQuoteLabel: '应用内示例洞察',
+    methodQuote: '“本月你存下了收入的 23%——主要得益于餐饮支出下降。”',
+    compareEyebrow: '对比一下', compareTitle: '为什么不用表格记账？',
+    compareSub: '诚实对比大家真正在用的记账方式。',
+    cmpH0: '场景', cmpH1: '小猪记账', cmpH2: '表格', cmpH3: '心里记',
+    cmpR1: '记一笔支出', cmpR1a: '点几下就好', cmpR1b: '打开电脑找单元格', cmpR1c: '到晚饭就忘了',
+    cmpR2: '看清分类规律', cmpR2a: '自动生成图表', cmpR2b: '手动写公式',
+    cmpR3: '月度预算检查', cmpR3a: '实时预算进度', cmpR3b: '得自己更新', cmpR3c: '全凭感觉',
+    cmpR4: '通俗理财建议', cmpR4a: '内置 AI 分析',
+    cmpR5: '中英双语界面', cmpR5a: '双语随时切换',
+    cmpNote: '基于日常典型使用场景的定性对比。',
+    q6: '为什么不用表格记账？', a6: '表格当然可以，但它在电脑里。小猪记账就在口袋里：点几下就记好一笔，图表自动生成，AI 还会用大白话解释这些数字。',
+    mq1: '餐饮', mq2: '交通', mq3: '购物', mq4: '居住', mq5: '娱乐',
+    mq6: '医疗', mq7: '教育', mq8: '旅行', mq9: '工资', mq10: '理财',
+    footerTag: '把每一笔钱看得清清楚楚——iPhone 免费下载。',
+    footProduct: '产品', footSupport: '支持', footPrefs: '偏好设置',
+    footContact: '联系我们', footAppStore: 'App Store 页面', footTheme: '切换深浅色'
   }
 };
 
@@ -92,7 +174,10 @@ function applyLang(lang) {
   document.documentElement.lang = currentLang;
   const ls = document.getElementById('langSwitch');
   if (ls) ls.textContent = currentLang === 'zh-CN' ? 'EN' : '中文';
+  const fls = document.getElementById('footLangSwitch');
+  if (fls) fls.textContent = currentLang === 'zh-CN' ? 'English' : '中文';
   try { localStorage.setItem('lang', currentLang); } catch (e) {}
+  renderTryDemo();
 }
 
 function initLang() {
@@ -114,6 +199,93 @@ function initTheme() {
   try { saved = localStorage.getItem('theme'); } catch (e) {}
   if (!saved) saved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   setTheme(saved);
+}
+
+// ===== Try-it ledger demo =====
+const DEMO_BUDGET = 1500;
+const DEMO_RING_C = 326.73;
+const DEMO_CHIPS = [
+  { key: 'tryChipCoffee', ic: '☕', amount: 18, income: false },
+  { key: 'tryChipTransport', ic: '🚌', amount: 12, income: false },
+  { key: 'tryChipDining', ic: '🍜', amount: 32, income: false },
+  { key: 'tryChipGroceries', ic: '🥬', amount: 76, income: false },
+  { key: 'tryChipSalary', ic: '💰', amount: 8000, income: true }
+];
+let demoEntries = [];
+
+function demoFmt(n) { return '¥' + n.toLocaleString('en-US'); }
+
+function renderTryDemo() {
+  const ledger = document.getElementById('demoLedger');
+  const ringFg = document.getElementById('demoRingFg');
+  const spentEl = document.getElementById('demoSpent');
+  const pctEl = document.getElementById('demoPct');
+  const tipEl = document.getElementById('demoTip');
+  const undoBtn = document.getElementById('demoUndo');
+  if (!ledger || !ringFg || !tipEl) return;
+  const t = I18N[currentLang] || I18N.en;
+
+  // Ledger (newest first, max 5 rows)
+  ledger.textContent = '';
+  if (demoEntries.length === 0) {
+    const li = document.createElement('li');
+    li.className = 'demo-empty';
+    li.textContent = t.tryLedgerEmpty;
+    ledger.appendChild(li);
+  } else {
+    demoEntries.slice(-5).reverse().forEach((idx, i) => {
+      const c = DEMO_CHIPS[idx];
+      const li = document.createElement('li');
+      if (i === 0) li.className = 'demo-new';
+      const ic = document.createElement('span'); ic.textContent = c.ic;
+      const name = document.createElement('span'); name.textContent = t[c.key];
+      const amt = document.createElement('span');
+      amt.className = 'demo-row-amt' + (c.income ? ' pos' : '');
+      amt.textContent = (c.income ? '+' : '−') + demoFmt(c.amount);
+      li.appendChild(ic); li.appendChild(name); li.appendChild(amt);
+      ledger.appendChild(li);
+    });
+  }
+
+  // Budget ring
+  const spent = demoEntries.reduce((s, idx) => s + (DEMO_CHIPS[idx].income ? 0 : DEMO_CHIPS[idx].amount), 0);
+  const pct = Math.min(spent / DEMO_BUDGET, 1);
+  ringFg.style.strokeDashoffset = (DEMO_RING_C * (1 - pct)).toFixed(2);
+  ringFg.classList.toggle('over', spent >= DEMO_BUDGET);
+  if (spentEl) spentEl.textContent = demoFmt(spent);
+  if (pctEl) pctEl.textContent = Math.round((spent / DEMO_BUDGET) * 100) + '%';
+
+  // Simulated AI tip
+  let tip;
+  if (demoEntries.length === 0) {
+    tip = t.tryTipStart;
+  } else if (DEMO_CHIPS[demoEntries[demoEntries.length - 1]].income) {
+    tip = t.tryTipIncome;
+  } else if (spent > DEMO_BUDGET / 2) {
+    tip = t.tryTipBudget;
+  } else {
+    const totals = {};
+    demoEntries.forEach(idx => { const c = DEMO_CHIPS[idx]; if (!c.income) totals[idx] = (totals[idx] || 0) + c.amount; });
+    const top = Object.keys(totals).sort((a, b) => totals[b] - totals[a])[0];
+    tip = t.tryTipTop.replace('{cat}', t[DEMO_CHIPS[top].key]);
+  }
+  tipEl.textContent = tip;
+
+  if (undoBtn) undoBtn.disabled = demoEntries.length === 0;
+}
+
+function initTryDemo() {
+  const panel = document.querySelector('.demo-panel');
+  if (!panel) return;
+  panel.querySelectorAll('.demo-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.getAttribute('data-chip'), 10);
+      if (DEMO_CHIPS[idx]) { demoEntries.push(idx); renderTryDemo(); }
+    });
+  });
+  const undoBtn = document.getElementById('demoUndo');
+  if (undoBtn) undoBtn.addEventListener('click', () => { demoEntries.pop(); renderTryDemo(); });
+  renderTryDemo();
 }
 
 // ===== Gallery =====
@@ -192,6 +364,8 @@ function initScroll() {
     const y = window.scrollY;
     if (nav) nav.classList.toggle('scrolled', y > 20);
     if (sticky) sticky.classList.toggle('show', y > 620);
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    document.documentElement.style.setProperty('--p', max > 0 ? (y / max).toFixed(4) : 0);
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -201,6 +375,7 @@ function initScroll() {
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initLang();
+  initTryDemo();
   initGallery();
   initReveal();
   initScroll();
@@ -212,6 +387,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (ls) ls.addEventListener('click', () => applyLang(currentLang === 'zh-CN' ? 'en' : 'zh-CN'));
   const tt = document.getElementById('themeToggle');
   if (tt) tt.addEventListener('click', () => setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+  const fls = document.getElementById('footLangSwitch');
+  if (fls) fls.addEventListener('click', () => applyLang(currentLang === 'zh-CN' ? 'en' : 'zh-CN'));
+  const ftt = document.getElementById('footThemeToggle');
+  if (ftt) ftt.addEventListener('click', () => setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
 
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', function (e) {

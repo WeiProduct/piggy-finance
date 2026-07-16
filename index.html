@@ -49,7 +49,8 @@
         { "@type": "Question", "name": "What can I track in the app?", "acceptedAnswer": { "@type": "Answer", "text": "Record expenses and income by category, manage bills, set a monthly budget, and review clear statistics." } },
         { "@type": "Question", "name": "How does the AI financial analysis work?", "acceptedAnswer": { "@type": "Answer", "text": "The app turns your recorded transactions into a plain-language analysis of income, savings, and spending, along with practical advice." } },
         { "@type": "Question", "name": "Does it support both English and Chinese?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Piggy Accounting has a complete English and Chinese interface — switch anytime in the app." } },
-        { "@type": "Question", "name": "Which devices are supported?", "acceptedAnswer": { "@type": "Answer", "text": "Piggy Accounting is a native iOS app available for iPhone on the App Store." } }
+        { "@type": "Question", "name": "Which devices are supported?", "acceptedAnswer": { "@type": "Answer", "text": "Piggy Accounting is a native iOS app available for iPhone on the App Store." } },
+        { "@type": "Question", "name": "Why not just use a spreadsheet?", "acceptedAnswer": { "@type": "Answer", "text": "Spreadsheets work, but they live on your laptop. Piggy Accounting is in your pocket: logging takes a couple of taps, charts build themselves, and AI analysis explains the numbers in plain language." } }
       ]
     }
     </script>
@@ -76,6 +77,7 @@
                 <a href="https://apps.apple.com/app/id6748370595" class="btn btn-primary btn-sm nav-cta" target="_blank" rel="noopener noreferrer" data-i18n="navGet">Get App</a>
             </div>
         </div>
+        <div class="scroll-progress" aria-hidden="true"></div>
     </nav>
 
     <main id="main">
@@ -138,6 +140,7 @@
 
     <section id="how" class="how">
         <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow" data-i18n="howEyebrow">How it works</span></div>
             <h2 class="section-title" data-i18n="howTitle">Clarity in three steps</h2>
             <p class="section-sub" data-i18n="howSub">Record it, review it, understand it — the rest is easy.</p>
             <div class="steps">
@@ -163,8 +166,56 @@
         </div>
     </section>
 
+    <section id="try" class="trydemo">
+        <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow" data-i18n="tryEyebrow">Try it</span></div>
+            <h2 class="section-title" data-i18n="tryTitle">Try a quick entry</h2>
+            <p class="section-sub" data-i18n="trySub">Tap a few presets — watch the ledger, the budget ring and the AI tip react instantly.</p>
+            <div class="demo-panel reveal">
+                <div class="demo-left">
+                    <h3 class="demo-h" data-i18n="tryPresets">Tap to record</h3>
+                    <div class="demo-chips">
+                        <button class="demo-chip" type="button" data-chip="0"><span class="demo-chip-ic" aria-hidden="true">☕</span><span data-i18n="tryChipCoffee">Coffee</span><span class="demo-chip-amt">¥18</span></button>
+                        <button class="demo-chip" type="button" data-chip="1"><span class="demo-chip-ic" aria-hidden="true">🚌</span><span data-i18n="tryChipTransport">Transport</span><span class="demo-chip-amt">¥12</span></button>
+                        <button class="demo-chip" type="button" data-chip="2"><span class="demo-chip-ic" aria-hidden="true">🍜</span><span data-i18n="tryChipDining">Dining</span><span class="demo-chip-amt">¥32</span></button>
+                        <button class="demo-chip" type="button" data-chip="3"><span class="demo-chip-ic" aria-hidden="true">🥬</span><span data-i18n="tryChipGroceries">Groceries</span><span class="demo-chip-amt">¥76</span></button>
+                        <button class="demo-chip income" type="button" data-chip="4"><span class="demo-chip-ic" aria-hidden="true">💰</span><span data-i18n="tryChipSalary">Salary</span><span class="demo-chip-amt">+¥8,000</span></button>
+                    </div>
+                    <button class="demo-undo" type="button" id="demoUndo" disabled>
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>
+                        <span data-i18n="tryUndo">Undo last</span>
+                    </button>
+                    <p class="demo-note" data-i18n="tryCaption">Interactive demo — no data leaves this page.</p>
+                </div>
+                <div class="demo-right">
+                    <div class="demo-dash">
+                        <div class="demo-ring-wrap">
+                            <div class="demo-ring">
+                                <svg viewBox="0 0 120 120" width="130" height="130" aria-hidden="true">
+                                    <circle class="demo-ring-bg" cx="60" cy="60" r="52" fill="none" stroke-width="10"/>
+                                    <circle class="demo-ring-fg" id="demoRingFg" cx="60" cy="60" r="52" fill="none" stroke-width="10" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+                                </svg>
+                                <div class="demo-ring-center"><strong id="demoSpent">¥0</strong><span id="demoPct">0%</span></div>
+                            </div>
+                            <div class="demo-ring-label" data-i18n="tryBudgetLabel">of ¥1,500 monthly budget</div>
+                        </div>
+                        <div class="demo-ledger-wrap">
+                            <h4 data-i18n="tryLedgerTitle">Recent entries</h4>
+                            <ul id="demoLedger" class="demo-ledger" aria-live="polite"></ul>
+                        </div>
+                    </div>
+                    <div class="demo-tip">
+                        <span class="demo-tip-badge"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7z"/></svg><span data-i18n="tryAiLabel">AI tip</span></span>
+                        <p id="demoTip"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="features" class="features">
         <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow" data-i18n="featuresEyebrow">Features</span></div>
             <h2 class="section-title" data-i18n="featuresTitle">Everything to stay on top of money</h2>
             <p class="section-sub" data-i18n="featuresSub">Built around the small, repeated moments of personal finance.</p>
             <div class="features-grid">
@@ -202,8 +253,43 @@
         </div>
     </section>
 
+    <section class="personas">
+        <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow" data-i18n="personasEyebrow">Who it's for</span></div>
+            <h2 class="section-title" data-i18n="personasTitle">Made for your money life</h2>
+            <p class="section-sub" data-i18n="personasSub">Different lives, same need — knowing where the money goes.</p>
+            <div class="personas-grid">
+                <div class="persona-card reveal">
+                    <div class="persona-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9L12 4 2 9l10 5 10-5z"/><path d="M6 11.5V16c0 1.6 2.7 3 6 3s6-1.4 6-3v-4.5"/><path d="M22 9v5"/></svg></div>
+                    <h3 data-i18n="persona1Title">Students</h3>
+                    <p data-i18n="persona1Desc">Stretch a monthly allowance with the budget ring — see what's left before the weekend, not after.</p>
+                    <span class="persona-tag" data-i18n="persona1Tag">Budget</span>
+                </div>
+                <div class="persona-card reveal">
+                    <div class="persona-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg></div>
+                    <h3 data-i18n="persona2Title">Young professionals</h3>
+                    <p data-i18n="persona2Desc">Rent, subscriptions, salary day — keep every bill in one list you can check in an elevator ride.</p>
+                    <span class="persona-tag" data-i18n="persona2Tag">Bills</span>
+                </div>
+                <div class="persona-card reveal">
+                    <div class="persona-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v11h14V10"/><path d="M10 21v-6h4v6"/></svg></div>
+                    <h3 data-i18n="persona3Title">Households</h3>
+                    <p data-i18n="persona3Desc">Category charts show where the family money actually goes — groceries, utilities, and the rest.</p>
+                    <span class="persona-tag" data-i18n="persona3Tag">Statistics</span>
+                </div>
+                <div class="persona-card reveal">
+                    <div class="persona-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="11" rx="1.6"/><path d="M2 19h20"/><path d="M9 8.5l-2 1.5 2 1.5M15 8.5l2 1.5-2 1.5"/></svg></div>
+                    <h3 data-i18n="persona4Title">Freelancers</h3>
+                    <p data-i18n="persona4Desc">Uneven income months? AI analysis reads your real savings rate across the ups and downs.</p>
+                    <span class="persona-tag" data-i18n="persona4Tag">AI analysis</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="screenshots" class="screenshots">
         <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow" data-i18n="screenshotsEyebrow">Screenshots</span></div>
             <h2 class="section-title" data-i18n="screenshotsTitle">A look inside</h2>
             <p class="section-sub" data-i18n="screenshotsSub">Swipe through — tap any shot to zoom in.</p>
             <div class="gallery">
@@ -252,6 +338,47 @@
         </div>
     </section>
 
+    <section class="method">
+        <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow" data-i18n="methodEyebrow">The method</span></div>
+            <h2 class="section-title" data-i18n="methodTitle">How three taps become financial insight</h2>
+            <p class="section-sub" data-i18n="methodSub">Under the simple surface there's a pipeline that turns raw entries into advice you can act on.</p>
+            <div class="method-flow">
+                <div class="method-node reveal">
+                    <span class="method-num">01</span>
+                    <div class="method-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l4 4L8 20l-5 1 1-5z"/></svg></div>
+                    <h3 data-i18n="methodN1Title">Entry</h3>
+                    <p data-i18n="methodN1Desc">Amount, category, note — a couple of taps and it's recorded.</p>
+                </div>
+                <div class="method-link" aria-hidden="true"><svg viewBox="0 0 56 24" width="56" height="24" fill="none"><path class="flow-line" d="M2 12h44"/><path class="flow-head" d="M46 7l7 5-7 5"/></svg></div>
+                <div class="method-node reveal">
+                    <span class="method-num">02</span>
+                    <div class="method-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4L12 22 2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></div>
+                    <h3 data-i18n="methodN2Title">Auto-categorized</h3>
+                    <p data-i18n="methodN2Desc">Every entry lands in a clean, browsable category history.</p>
+                </div>
+                <div class="method-link" aria-hidden="true"><svg viewBox="0 0 56 24" width="56" height="24" fill="none"><path class="flow-line" d="M2 12h44"/><path class="flow-head" d="M46 7l7 5-7 5"/></svg></div>
+                <div class="method-node reveal">
+                    <span class="method-num">03</span>
+                    <div class="method-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4"/><path d="M4 20h16"/><rect x="7" y="12" width="3" height="5"/><rect x="12" y="8" width="3" height="9"/><rect x="17" y="5" width="3" height="12"/></svg></div>
+                    <h3 data-i18n="methodN3Title">Charts &amp; budget</h3>
+                    <p data-i18n="methodN3Desc">Pie, bar and trend charts plus your budget ring update instantly.</p>
+                </div>
+                <div class="method-link" aria-hidden="true"><svg viewBox="0 0 56 24" width="56" height="24" fill="none"><path class="flow-line" d="M2 12h44"/><path class="flow-head" d="M46 7l7 5-7 5"/></svg></div>
+                <div class="method-node reveal">
+                    <span class="method-num">04</span>
+                    <div class="method-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7z"/><path d="M18 15l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z"/></svg></div>
+                    <h3 data-i18n="methodN4Title">AI plain-language analysis</h3>
+                    <p data-i18n="methodN4Desc">AI reads the numbers and answers the real question: where did the money go?</p>
+                </div>
+            </div>
+            <figure class="method-quote reveal">
+                <span class="demo-tip-badge"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7z"/></svg><span data-i18n="methodQuoteLabel">Sample in-app insight</span></span>
+                <blockquote data-i18n="methodQuote">“You saved 23% of income this month — mostly from lower dining spend.”</blockquote>
+            </figure>
+        </div>
+    </section>
+
     <section class="privacy">
         <div class="container privacy-card">
             <div class="privacy-lead">
@@ -267,8 +394,62 @@
         </div>
     </section>
 
+    <section class="compare">
+        <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow" data-i18n="compareEyebrow">Compare</span></div>
+            <h2 class="section-title" data-i18n="compareTitle">Why not just a spreadsheet?</h2>
+            <p class="section-sub" data-i18n="compareSub">An honest look at the tools people actually use for money.</p>
+            <div class="compare-scroll reveal">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th scope="col" data-i18n="cmpH0">Scenario</th>
+                            <th scope="col" class="cmp-hero" data-i18n="cmpH1">Piggy Accounting</th>
+                            <th scope="col" data-i18n="cmpH2">Spreadsheet</th>
+                            <th scope="col" data-i18n="cmpH3">Mental math</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" data-i18n="cmpR1">Logging one expense</th>
+                            <td class="cmp-hero"><span class="cmp-check" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg></span><span data-i18n="cmpR1a">A couple of taps</span></td>
+                            <td data-i18n="cmpR1b">Open laptop, find the row</td>
+                            <td data-i18n="cmpR1c">Forgotten by dinner</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-i18n="cmpR2">Spotting category patterns</th>
+                            <td class="cmp-hero"><span class="cmp-check" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg></span><span data-i18n="cmpR2a">Automatic charts</span></td>
+                            <td data-i18n="cmpR2b">Manual formulas</td>
+                            <td class="cmp-dash">—</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-i18n="cmpR3">Monthly budget check</th>
+                            <td class="cmp-hero"><span class="cmp-check" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg></span><span data-i18n="cmpR3a">Live budget ring</span></td>
+                            <td data-i18n="cmpR3b">Update it yourself</td>
+                            <td data-i18n="cmpR3c">A rough guess</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-i18n="cmpR4">Plain-language advice</th>
+                            <td class="cmp-hero"><span class="cmp-check" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg></span><span data-i18n="cmpR4a">AI analysis built in</span></td>
+                            <td class="cmp-dash">—</td>
+                            <td class="cmp-dash">—</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" data-i18n="cmpR5">EN / 中文 interface</th>
+                            <td class="cmp-hero"><span class="cmp-check" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg></span><span data-i18n="cmpR5a">Both, switch anytime</span></td>
+                            <td class="cmp-dash">—</td>
+                            <td class="cmp-dash">—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="compare-note" data-i18n="cmpNote">Qualitative comparison based on typical day-to-day use.</p>
+        </div>
+    </section>
+
     <section id="faq" class="faq">
         <div class="container">
+            <div class="section-eyebrow"><span class="eyebrow" data-i18n="faqEyebrow">FAQ</span></div>
             <h2 class="section-title" data-i18n="faqTitle">Frequently asked questions</h2>
             <div class="faq-list">
                 <details class="faq-item reveal"><summary data-i18n="q1">How much does Piggy Accounting cost?</summary><p data-i18n="a1">Piggy Accounting is free to download on the App Store.</p></details>
@@ -276,9 +457,41 @@
                 <details class="faq-item reveal"><summary data-i18n="q3">How does the AI financial analysis work?</summary><p data-i18n="a3">The app turns your recorded transactions into a plain-language analysis of income, savings, and spending, along with practical advice.</p></details>
                 <details class="faq-item reveal"><summary data-i18n="q4">Does it support both English and Chinese?</summary><p data-i18n="a4">Yes. Piggy Accounting has a complete English and Chinese interface — switch anytime in the app.</p></details>
                 <details class="faq-item reveal"><summary data-i18n="q5">Which devices are supported?</summary><p data-i18n="a5">Piggy Accounting is a native iOS app available for iPhone on the App Store.</p></details>
+                <details class="faq-item reveal"><summary data-i18n="q6">Why not just use a spreadsheet?</summary><p data-i18n="a6">Spreadsheets work, but they live on your laptop. Piggy Accounting is in your pocket: logging takes a couple of taps, charts build themselves, and AI analysis explains the numbers in plain language.</p></details>
             </div>
         </div>
     </section>
+
+    <div class="marquee-strip" aria-hidden="true">
+        <div class="marquee">
+            <div class="marquee-track">
+                <div class="mq-group">
+                    <span class="mq-chip"><span class="mq-ic">🍜</span><span data-i18n="mq1">Dining</span></span>
+                    <span class="mq-chip"><span class="mq-ic">🚌</span><span data-i18n="mq2">Transport</span></span>
+                    <span class="mq-chip"><span class="mq-ic">🛍️</span><span data-i18n="mq3">Shopping</span></span>
+                    <span class="mq-chip"><span class="mq-ic">🏠</span><span data-i18n="mq4">Housing</span></span>
+                    <span class="mq-chip"><span class="mq-ic">🎬</span><span data-i18n="mq5">Entertainment</span></span>
+                    <span class="mq-chip"><span class="mq-ic">💊</span><span data-i18n="mq6">Healthcare</span></span>
+                    <span class="mq-chip"><span class="mq-ic">📚</span><span data-i18n="mq7">Education</span></span>
+                    <span class="mq-chip"><span class="mq-ic">✈️</span><span data-i18n="mq8">Travel</span></span>
+                    <span class="mq-chip"><span class="mq-ic">💰</span><span data-i18n="mq9">Salary</span></span>
+                    <span class="mq-chip"><span class="mq-ic">📈</span><span data-i18n="mq10">Investment</span></span>
+                </div>
+                <div class="mq-group">
+                    <span class="mq-chip"><span class="mq-ic">🍜</span><span data-i18n="mq1">Dining</span></span>
+                    <span class="mq-chip"><span class="mq-ic">🚌</span><span data-i18n="mq2">Transport</span></span>
+                    <span class="mq-chip"><span class="mq-ic">🛍️</span><span data-i18n="mq3">Shopping</span></span>
+                    <span class="mq-chip"><span class="mq-ic">🏠</span><span data-i18n="mq4">Housing</span></span>
+                    <span class="mq-chip"><span class="mq-ic">🎬</span><span data-i18n="mq5">Entertainment</span></span>
+                    <span class="mq-chip"><span class="mq-ic">💊</span><span data-i18n="mq6">Healthcare</span></span>
+                    <span class="mq-chip"><span class="mq-ic">📚</span><span data-i18n="mq7">Education</span></span>
+                    <span class="mq-chip"><span class="mq-ic">✈️</span><span data-i18n="mq8">Travel</span></span>
+                    <span class="mq-chip"><span class="mq-ic">💰</span><span data-i18n="mq9">Salary</span></span>
+                    <span class="mq-chip"><span class="mq-ic">📈</span><span data-i18n="mq10">Investment</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section id="download" class="download">
         <div class="container">
@@ -303,7 +516,52 @@
 
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a class="nav-brand" href="#" aria-label="Piggy Accounting">
+                        <span class="brand-icon" aria-hidden="true"><img src="images/piggy_logo.png" alt="" width="32" height="32"></span>
+                        <span class="brand-name">Piggy Accounting</span>
+                    </a>
+                    <p class="footer-tag" data-i18n="footerTag">Personal finance, made clear — free on iPhone.</p>
+                    <a class="appstore-badge footer-badge" href="https://apps.apple.com/app/id6748370595" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store">
+                        <svg viewBox="0 0 120 40" width="132" height="44" role="img" aria-hidden="true">
+                            <rect width="120" height="40" rx="8" fill="#000000"/>
+                            <path fill="#ffffff" d="M24.77 20.3c-.02-2.4 1.96-3.56 2.05-3.62-1.12-1.64-2.86-1.86-3.48-1.89-1.48-.15-2.89.87-3.64.87-.75 0-1.91-.85-3.14-.83-1.62.02-3.11.94-3.94 2.39-1.68 2.92-.43 7.25 1.2 9.62.8 1.16 1.75 2.46 3 2.41 1.2-.05 1.66-.78 3.11-.78 1.45 0 1.86.78 3.14.75 1.3-.02 2.12-1.18 2.91-2.35.92-1.35 1.3-2.66 1.32-2.73-.03-.01-2.53-.97-2.55-3.85zM22.35 13.2c.66-.8 1.11-1.92.99-3.03-.95.04-2.11.64-2.79 1.44-.61.71-1.15 1.84-1 2.92 1.06.08 2.14-.54 2.8-1.33z"/>
+                            <text x="34" y="16" fill="#ffffff" font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="6">Download on the</text>
+                            <text x="33.5" y="31" fill="#ffffff" font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700">App Store</text>
+                        </svg>
+                    </a>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="footProduct">Product</h3>
+                    <ul>
+                        <li><a href="#how" data-i18n="navHow">How it works</a></li>
+                        <li><a href="#features" data-i18n="navFeatures">Features</a></li>
+                        <li><a href="#screenshots" data-i18n="navScreenshots">Screenshots</a></li>
+                        <li><a href="#faq" data-i18n="navFaq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="footSupport">Support</h3>
+                    <ul>
+                        <li><a href="mailto:founder@weiproduct.com?subject=Piggy%20Accounting%20support" data-i18n="footContact">Contact us</a></li>
+                        <li><a href="https://weiproduct.com/" target="_blank" rel="noopener noreferrer">WeiProduct</a></li>
+                        <li><a href="https://apps.apple.com/app/id6748370595" target="_blank" rel="noopener noreferrer" data-i18n="footAppStore">App Store page</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 data-i18n="footPrefs">Preferences</h3>
+                    <div class="footer-prefs">
+                        <button class="foot-btn" type="button" id="footThemeToggle">
+                            <svg class="i-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg>
+                            <svg class="i-moon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8z"/></svg>
+                            <span data-i18n="footTheme">Toggle theme</span>
+                        </button>
+                        <button class="foot-btn" type="button" id="footLangSwitch">中文</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
                 <p>&copy; <span id="currentYear">2026</span> <span data-i18n="footerRights">Piggy Accounting. All rights reserved.</span></p>
                 <p data-i18n="footerMadeBy">Built by WeiProduct</p>
                 <p>Contact: <a href="mailto:founder@weiproduct.com?subject=Piggy%20Accounting%20support">founder@weiproduct.com</a></p>
